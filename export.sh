@@ -2,6 +2,8 @@
 ## Very Simple Script To Export Data From Mysql
 ###
 
+set -o nounset
+
 SQL=$1
 DATA_FILE=$2
 
