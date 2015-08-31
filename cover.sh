@@ -1,5 +1,6 @@
 #!/bin/bash
 source /etc/profile
+set -o nounset
 
 ####
 ### very simple script to process image
@@ -7,6 +8,23 @@ source /etc/profile
 ### Todo
 ###  1. compatible with the tool mediaInfo to detect image width x height
 ###  2. add a option to chose delete the src image or not
+###  3. compatible local src image
+###  4. read from file queue to covert multi images
+###  5. add the surpot of regex src file name
+###  6. add some image 特效
+###  7. add the support of dir
+###  8. upload to qiniu storage
+###  9.
+###  10.
+###  11.
+###  12.
+###  13.
+###  14.
+###  15.
+###  16.
+###  17.
+###  18.
+###  19.
 ####
 
 
@@ -31,6 +49,11 @@ fi
 
 FILE_NAME=`basename ${SRC_IMG}`
 DEST_IMG="${DEST_IMG_PATH}/${FILE_NAME}"
+
+
+#Todo
+# 1. check if it's the remote url
+# 2. if it's the local path, it will not delete local file by default
 
 wget -P $SRC_IMG_PATH -q $SRC_IMG
 #源视频下载失败重试
@@ -65,9 +88,9 @@ fi
 gm convert $SRC_IMG -thumbnail $THUMBNAIL $BACKGROUND -gravity center -extent ${DEST_WIDTH}x${DEST_HEIGHT} $DEST_IMG
 
 #DELETE SRC FILE
-#if [$DELETE_SRC_LOCAL_FILE -eq 1]
-	rm -f "$SRC_IMG_PATH/$FILE_NAME"
-#fi
+if [$DELETE_SRC_LOCAL_FILE -eq 1]
+       rm -f "$SRC_IMG_PATH/$FILE_NAME"
+fi
 
 #写log
 REPLACE_TIME=$(date +%Y-%m-%d_%H:%M:%S)
