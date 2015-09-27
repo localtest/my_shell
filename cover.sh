@@ -40,12 +40,14 @@ DELETE_SRC_LOCAL_FILE=$4
 DEST_WIDTH=510
 DEST_HEIGHT=286
 
+#You can special a dir to process
 SRC_IMG_PATH="/tmp"
-DEST_IMG_PATH="./trans"
-LOG_PATH="./debug.log"
+
+DEST_IMG_PATH="~/Downloads/demo"
 if [ ! -d "$DEST_IMG_PATH" ]; then 
     mkdir "$DEST_IMG_PATH" 
 fi 
+LOG_PATH="./debug.log"
 
 FILE_NAME=`basename ${SRC_IMG}`
 DEST_IMG="${DEST_IMG_PATH}/${FILE_NAME}"
@@ -87,7 +89,7 @@ fi
 
 gm convert $SRC_IMG -thumbnail $THUMBNAIL $BACKGROUND -gravity center -extent ${DEST_WIDTH}x${DEST_HEIGHT} $DEST_IMG
 
-#DELETE SRC FILE
+#Delete source file
 if [$DELETE_SRC_LOCAL_FILE -eq 1]
        rm -f "$SRC_IMG_PATH/$FILE_NAME"
 fi
