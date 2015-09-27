@@ -10,7 +10,8 @@ My own shell —— welcome give advice to me!
 
 		Note:
 
-			You need install the GraphicsMagick before useing it.
+			a. You need install the GraphicsMagick before useing it.
+			b. You'd better install the mediaInfo if you don't want to pass the param width or height
 
 		Format:
 
