@@ -65,6 +65,7 @@ for (( i=0; i<3; i++)); do
         wget -P $SRC_IMG_PATH -q $SRC_IMG
     fi 
 done
+SRC_IMG="${SRC_IMG_PATH}/${FILE_NAME}"
 
 BACKGROUND=""
 THUMBNAIL=""
