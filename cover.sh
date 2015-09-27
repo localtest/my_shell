@@ -43,7 +43,7 @@ DEST_HEIGHT=286
 #You can special a dir to process
 SRC_IMG_PATH="/tmp"
 
-DEST_IMG_PATH="~/Downloads/demo"
+DEST_IMG_PATH="/image_demo"
 if [ ! -d "$DEST_IMG_PATH" ]; then 
     mkdir "$DEST_IMG_PATH" 
 fi 
