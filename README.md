@@ -8,6 +8,10 @@ My own shell —— welcome give advice to me!
 
 3. cover.sh	Very simple script to process image.<br/>
 
+		Note:
+
+			You need install the GraphicsMagick before useing it.
+
 		Format:
 
 		./cover.sh $sourceImgUrl $imageWidth $imageHeight $ifDeleteSource(Tmp)File
