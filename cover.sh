@@ -1,13 +1,11 @@
 #!/bin/bash
 source /etc/profile
-set -o nounset
+#set -o nounset
 
 ####
 ### very simple script to process image
 ###
 ### Todo
-###  1. compatible with the tool mediaInfo to detect image width x height
-###  2. add a option to chose delete the src image or not
 ###  3. compatible local src image
 ###  4. read from file queue to covert multi images
 ###  5. add the surpot of regex src file name
@@ -42,7 +40,6 @@ DEST_HEIGHT=286
 
 #You can special a dir to process
 SRC_IMG_PATH="/tmp"
-
 DEST_IMG_PATH="/image_demo"
 if [ ! -d "$DEST_IMG_PATH" ]; then 
     mkdir "$DEST_IMG_PATH" 
@@ -66,6 +63,15 @@ for (( i=0; i<3; i++)); do
     fi 
 done
 SRC_IMG="${SRC_IMG_PATH}/${FILE_NAME}"
+
+
+#Todo: one detect grep twice
+if [ ! $WIDTH ]; then
+	WIDTH=`mediainfo $SRC_IMG | grep 'Width' | awk '{print $3}'`
+fi
+if [ ! $HEIGHT ]; then
+	HEIGHT=`mediainfo $SRC_IMG | grep 'Height' | awk '{print $3}'`
+fi
 
 BACKGROUND=""
 THUMBNAIL=""
@@ -91,7 +97,7 @@ fi
 gm convert $SRC_IMG -thumbnail $THUMBNAIL $BACKGROUND -gravity center -extent ${DEST_WIDTH}x${DEST_HEIGHT} $DEST_IMG
 
 #Delete source file
-if [$DELETE_SRC_LOCAL_FILE -eq 1]
+if [ $DELETE_SRC_LOCAL_FILE -eq 1 ]; then
        rm -f "$SRC_IMG_PATH/$FILE_NAME"
 fi
 
