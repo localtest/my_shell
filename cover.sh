@@ -6,7 +6,6 @@ source /etc/profile
 ### very simple script to process image
 ###
 ### Todo
-###  1. add getopts to optimize the script.
 ###  2. compatible the suppot of remote(or local) video frame
 ###  3. compatible local src image
 ###  4. read from file queue to covert multi images
@@ -21,24 +20,17 @@ source /etc/profile
 ####
 
 
-##
-# base config
-# Todo
-# 	1. add the necessary annotation here
-##
-
-
 #ffmpeg -i $videoSource -y -f image2 -ss 00:01:00 -vframes 1 test1.jpg
 #ffmpeg -i $videoSource -y -f image2 -ss 60 -vframes 1 test1.jpg
 
-SRC_IMG=$1
-WIDTH=$2
-HEIGHT=$3
-DELETE_SRC_LOCAL_FILE=$4
-DEST_WIDTH=510
-DEST_HEIGHT=286
-
-#You can special a dir to process
+WIDTH=
+HEIGHT=
+TYPE=
+EFFECT=
+DEST_WIDTH=
+DEST_HEIGHT=
+DELETE_SRC_LOCAL_FILE=0
+SRC_IMG=
 SRC_IMG_PATH="/tmp"
 DEST_IMG_PATH="/image_demo"
 if [ ! -d "$DEST_IMG_PATH" ]; then 
@@ -46,9 +38,56 @@ if [ ! -d "$DEST_IMG_PATH" ]; then
 fi 
 LOG_PATH="./debug.log"
 
+
+#
+################################################################
+# Usage
+################################################################
+#
+usage() {
+	echo
+    printf >&1 "Usage:\n"
+    printf >&1 "Convert Image: ./cover.sh <-t convert> <-e effect> <-w width> <-h height> <-d delete> <-W width> <-H width> <-f address>\n"
+	echo
+    printf >&1 "       -t process type.\n"
+    printf >&1 "       -e special effect.\n"
+    printf >&1 "       -w source image width.\n"
+    printf >&1 "       -h source image height.\n"
+    printf >&1 "       -d delete source file.\n"
+    printf >&1 "       -W source image width.\n"
+    printf >&1 "       -H source image height.\n"
+    printf >&1 "       -f source image file.\n"
+
+    echo
+}
+if [ -z "$1" ]; then
+    usage
+    exit 0
+fi
+
+while getopts "t:e:w:h:W:H:f:d" opt; do
+  case $opt in
+    t) TYPE="$OPTARG";;
+    e) EFFECT="$OPTARG";;
+    w) WIDTH="$OPTARG";;
+    h) HEIGHT="$OPTARG";;
+    W) DEST_WIDTH="$OPTARG";;
+    H) DEST_HEIGHT="$OPTARG";;
+    f) SRC_IMG="$OPTARG";;
+    d) DELETE_SRC_LOCAL_FILE=1;;
+    \?)    usage;
+         exit 1;;
+  esac
+done
+[ -z "$DEST_WIDTH" ] && DEST_WIDTH=500
+[ -z "$DEST_HEIGHT" ] && DEST_HEIGHT=500
+if [ -z "$SRC_IMG" ]; then
+	usage
+	exit 0
+fi
+
 FILE_NAME=`basename ${SRC_IMG}`
 DEST_IMG="${DEST_IMG_PATH}/${FILE_NAME}"
-
 
 #Todo
 # 1. check if it's the remote url
@@ -64,7 +103,6 @@ for (( i=0; i<3; i++)); do
 done
 SRC_IMG="${SRC_IMG_PATH}/${FILE_NAME}"
 
-
 #Todo: one detect grep twice
 if [ ! $WIDTH ]; then
 	WIDTH=`mediainfo $SRC_IMG | grep 'Width' | awk '{print $3}'`
@@ -72,6 +110,7 @@ fi
 if [ ! $HEIGHT ]; then
 	HEIGHT=`mediainfo $SRC_IMG | grep 'Height' | awk '{print $3}'`
 fi
+
 
 BACKGROUND=""
 THUMBNAIL=""
