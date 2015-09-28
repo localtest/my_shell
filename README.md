@@ -6,12 +6,12 @@ My own shell —— welcome give advice to me!
 1. replace.sh	Simple replace script that have a simple recovery function.<br/>
 2. rm_back.sh	Simple delete script that have a simple recovery function(unover).<br/>
 
-3. cover.sh	Very simple script to process image.<br/>
+3. cover.sh	Very simple script to process image.(cover.sh是一个非常简单的的图片处理封装)<br/>
 
 		Note:
 
-			a. You need install the GraphicsMagick before useing it.
-			b. You'd better install the mediaInfo if you don't want to pass the param width or height
+			a. You need install the GraphicsMagick before useing it(如果使用它，你需要事先安装GraphicsMagick工具).
+			b. You'd better install the mediaInfo if you don't want to pass the param width or height(如果你不想手工指定源图片的宽高, 最好安装mediaInfo工具).
 
 		Usage:
 
