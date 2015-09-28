@@ -13,11 +13,18 @@ My own shell —— welcome give advice to me!
 			a. You need install the GraphicsMagick before useing it.
 			b. You'd better install the mediaInfo if you don't want to pass the param width or height
 
-		Format:
+		Usage:
 
-		./cover.sh $sourceImgUrl $imageWidth $imageHeight $ifDeleteSource(Tmp)File
+			Convert Image: ./cover.sh <-t convert> <-e effect> <-w width> <-h height> <-d delete> <-W width> <-H width> <-f address>
 
-		Eg: ./cover.sh "http://" 600 600
+			   -t process type.
+			   -e special effect.
+			   -w source image width.
+			   -h source image height.
+			   -d delete source file.
+			   -W source image width.
+			   -H source image height.
+			   -f source image file.
 <br/>
 4. export.sh	Very Simple Script To Export Data From Mysql<br/>
 
