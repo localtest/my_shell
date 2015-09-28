@@ -6,23 +6,18 @@ source /etc/profile
 ### very simple script to process image
 ###
 ### Todo
+###  1. add getopts to optimize the script.
+###  2. compatible the suppot of remote(or local) video frame
 ###  3. compatible local src image
 ###  4. read from file queue to covert multi images
 ###  5. add the surpot of regex src file name
 ###  6. add some image 特效
 ###  7. add the support of dir
-###  8. upload to qiniu storage
+###  8. add the support to upload to cloud storage
 ###  9.
 ###  10.
 ###  11.
 ###  12.
-###  13.
-###  14.
-###  15.
-###  16.
-###  17.
-###  18.
-###  19.
 ####
 
 
@@ -31,6 +26,11 @@ source /etc/profile
 # Todo
 # 	1. add the necessary annotation here
 ##
+
+
+#ffmpeg -i $videoSource -y -f image2 -ss 00:01:00 -vframes 1 test1.jpg
+#ffmpeg -i $videoSource -y -f image2 -ss 60 -vframes 1 test1.jpg
+
 SRC_IMG=$1
 WIDTH=$2
 HEIGHT=$3
